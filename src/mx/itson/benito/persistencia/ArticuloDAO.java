@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.utilerias.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -32,7 +34,7 @@ public class ArticuloDAO {
         return articulos;
     }
     
-    public static boolean guardar(String nombre, String precio, String clave, Proveedor proveedor) {
+    public static boolean guardar(String nombre, Double precio, String clave, Proveedor proveedor) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -40,19 +42,75 @@ public class ArticuloDAO {
             Articulo a = new Articulo();
             a.setNombre(nombre);
             a.setPrecio(precio);
-            a.setString(clave)
+            a.setClave(clave);
+            a.setProveedor(proveedor);
+            
             
             
 
-            session.save(o);
+            session.save(a);
 
             session.getTransaction().commit();
 
-            resultado = o.getId() != 0;
+            resultado = a.getId() != 0;
         } catch (Exception ex) {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
 
+        return resultado;
+    }
+    
+    public static boolean editar(int id, String nombre, Double precio, String clave, Proveedor proveedor){
+       boolean resultado = false;
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            
+            Articulo articulo = obtenerPorId(id);
+            if(articulo !=null){
+                articulo.setNombre(nombre);
+                articulo.setPrecio(precio);
+                articulo.setClave(clave);
+                articulo.setProveedor(proveedor);
+               
+                
+                session.saveOrUpdate(articulo);
+                session.getTransaction().commit();
+                resultado = true;
+            }
+        } catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
+    
+    public static Articulo obtenerPorId(int id) {
+        Articulo articulo = null;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            articulo = session.get(Articulo.class, id);
+
+        } catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return articulo;
+    }
+    
+     public static boolean eliminar(int id){
+        boolean resultado = false;
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            
+            Articulo articulo = obtenerPorId(id);
+            if(articulo !=null){
+                session.delete(articulo);
+                session.getTransaction().commit();
+                resultado = true;
+            }    
+        }catch (HibernateException ex) {
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
         return resultado;
     }
 }

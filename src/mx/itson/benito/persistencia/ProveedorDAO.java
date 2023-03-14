@@ -7,6 +7,7 @@ package mx.itson.benito.persistencia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -21,7 +22,7 @@ public class ProveedorDAO {
         List<Proveedor> proveedores = new ArrayList<>();
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            CriteriaQuery<Proveedor> criteriaQuery = session.getCriteriaBuilder().createQuery(Conductor.class);
+            CriteriaQuery<Proveedor> criteriaQuery = session.getCriteriaBuilder().createQuery(Proveedor.class);
             criteriaQuery.from(Proveedor.class);
 
             proveedores = session.createQuery(criteriaQuery).getResultList();
@@ -44,7 +45,7 @@ public class ProveedorDAO {
             p.setEmail(email);
             p.setContacto(contacto);
             p.setDireccion(direccion);
-            p.telefono(telefono);
+            p.setTelefono(telefono);
 
             session.save(p);
 
