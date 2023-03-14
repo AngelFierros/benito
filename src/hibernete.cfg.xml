@@ -12,13 +12,13 @@
             com.mysql.cj.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/distribuciondb
+            jdbc:mysql://localhost/distribuciondb?useSSL=false
         </property>
         <property name="hibernate.connection.username">
             root
         </property>    
         <property name="hibernate.connection.password">
-            guaymas
+            root
         </property>
         <mapping class="mx.itson.benito.entidades.Articulo"/> 
         <mapping class="mx.itson.benito.entidades.Proveedor"/>    
