@@ -21,6 +21,12 @@ public class Articulo {
     private double precio;
     private String clave;
     
+    /**
+     * CascadeType.PERSIST: indica que cuando se persiste una entidad, también se deben persistir todas las entidades relacionadas.
+       CascadeType.MERGE: indica que cuando se actualiza una entidad, también se deben actualizar todas las entidades relacionadas.
+       CascadeType.DETACH: indica que cuando se desenlaza una entidad, también se deben desenlazar todas las entidades relacionadas.
+       CascadeType.REFRESH: indica que cuando se refresca una entidad, también se deben refrescar todas las entidades relacionadas.
+     */
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "idProveedor")
