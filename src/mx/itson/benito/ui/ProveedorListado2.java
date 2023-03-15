@@ -123,7 +123,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -191,7 +191,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
         }
-        tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
+       
     }           
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -162,7 +162,7 @@ public class ProveedorLIstado extends javax.swing.JDialog {
             System.err.println("Ocurrio un error: " + ex.getMessage());
 
         }
-        tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
+       
     }           
     
     
