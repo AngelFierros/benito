@@ -62,6 +62,11 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblProveedores);
 
         jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +125,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         
         
-        ProveedorFormulario formulario = new ProveedorFormulario(this, true);
+        ProveedorFormulario formulario = new ProveedorFormulario(this, true,0);
 
         formulario.setVisible(true);
 
@@ -154,6 +159,18 @@ int filaSeleccionada = tblProveedores.getSelectedRow();
         JOptionPane.showMessageDialog(ProveedorListado2.this, "Debe seleccionar un conductor para eliminar.");
     } 
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int reglon = tblProveedores.getSelectedRow();
+        String id = tblProveedores.getModel().getValueAt(reglon,0).toString();
+        
+        ProveedorFormulario formulario = new ProveedorFormulario(this, true, Integer.parseInt(id));
+        formulario.setVisible(true);
+
+        cargarTabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

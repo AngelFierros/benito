@@ -5,7 +5,7 @@
 package mx.itson.benito.ui;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
@@ -13,16 +13,33 @@ import mx.itson.benito.persistencia.ProveedorDAO;
  * @author PC
  */
 public class ProveedorFormulario extends javax.swing.JDialog {
-
-    int id = 0;
     
+    int id = 0;
+
     /**
-     * Creates new form ProveedorFormulario
+     * Creates new form ProveedorFormulario2
      */
-    public ProveedorFormulario(java.awt.Frame parent, boolean modal) {
+    public ProveedorFormulario(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.id = id;
+        cargarFormulario();
     }
+    public void cargarFormulario() {
+        if (this.id != 0) {
+            Proveedor p = ProveedorDAO.obtenerPorId(this.id);
+            txtNombre.setText(p.getNombre());
+            txtClave.setText(p.getClave());
+            txtEmail.setText(p.getEmail());
+            txtContacto.setText(p.getContacto());
+            txtDireccion.setText(p.getDireccion());
+            txtTelefono.setText(p.getTelefono());
+            
+        }
+
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,36 +50,21 @@ public class ProveedorFormulario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtClave = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtContacto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        txtClave = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
+        txtContacto = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        txtDireccion = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
-
-        jLabel1.setText("Nombre");
-
-        jLabel2.setText("Clave");
-
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Email");
 
@@ -70,13 +72,9 @@ public class ProveedorFormulario extends javax.swing.JDialog {
 
         jLabel5.setText("Direccion");
 
-        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Telefono");
+
+        jLabel1.setText("Nombre");
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,12 +83,17 @@ public class ProveedorFormulario extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("Clave");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -101,15 +104,12 @@ public class ProveedorFormulario extends javax.swing.JDialog {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(txtNombre)
-                            .addComponent(txtClave)
                             .addComponent(txtEmail)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                            .addComponent(txtClave)
                             .addComponent(txtContacto)
-                            .addComponent(txtDireccion)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addComponent(txtDireccion))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +122,7 @@ public class ProveedorFormulario extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,70 +130,50 @@ public class ProveedorFormulario extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
-    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         String nombre  = txtNombre.getText();
         String clave = txtClave.getText();
         String email = txtEmail.getText();
         String contacto = txtContacto.getText();
         String direccion = txtDireccion.getText();
         String telefono = txtTelefono.getText();
-        
+
         try {
-           
+
             boolean resultado = this.id == 0 ?
-                    ProveedorDAO.guardar(nombre,clave, email,contacto,direccion,telefono):
-                    ProveedorDAO.editar(this.id, nombre, clave, email,contacto,direccion,telefono);
-        
+            ProveedorDAO.guardar(nombre,clave, email,contacto,direccion,telefono):
+            ProveedorDAO.editar(this.id, nombre, clave, email,contacto,direccion,telefono);
+
             if(resultado){
                 JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
-                
+
             }else{
                 JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el registro", "Registro no guardado", JOptionPane.ERROR_MESSAGE);
-               
+
             }
         } catch (Exception ex) {
-           
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    
-        // Obtiene la instancia de ProveedorListado2 y llama a cargarTabla
-        ProveedorListado2 listado = (ProveedorListado2) SwingUtilities.getWindowAncestor(ProveedorFormulario.this);
-        listado.cargarTabla();
-    
-
-
-    }//GEN-LAST:event_formWindowClosed
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -220,11 +200,12 @@ public class ProveedorFormulario extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(ProveedorFormulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ProveedorFormulario dialog = new ProveedorFormulario(new javax.swing.JFrame(), true);
+                ProveedorFormulario dialog = new ProveedorFormulario(new javax.swing.JFrame(), true,0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -235,8 +216,6 @@ public class ProveedorFormulario extends javax.swing.JDialog {
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
