@@ -5,6 +5,7 @@
 package mx.itson.benito.ui;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ProveedorDAO;
 
@@ -65,6 +66,11 @@ public class ProveedorFormulario extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel3.setText("Email");
 
@@ -173,6 +179,12 @@ public class ProveedorFormulario extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+         // Obtiene la instancia de ProveedorListado2 y llama a cargarTabla
+        ProveedorListado2 listado = (ProveedorListado2) SwingUtilities.getWindowAncestor(ProveedorFormulario.this);
+        listado.cargarTabla();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
