@@ -126,9 +126,9 @@ public class ProveedorLIstado extends javax.swing.JDialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
-        ProveedorFormulario formulario = new ProveedorFormulario(this, true, 0);
+     //   ProveedorFormulario formulario = new ProveedorFormulario(this, true, 0);
 
-        formulario.setVisible(true);
+     //   formulario.setVisible(true);
 
         cargarTabla();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
