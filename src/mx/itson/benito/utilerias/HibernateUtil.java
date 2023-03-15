@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package mx.itson.benito.utilerias;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
