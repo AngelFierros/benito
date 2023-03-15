@@ -5,6 +5,7 @@
 package mx.itson.benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ProveedorDAO;
@@ -34,7 +35,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAñadir = new javax.swing.JMenuItem();
@@ -62,7 +63,12 @@ public class ProveedorListado2 extends javax.swing.JFrame {
 
         jButton1.setText("Editar");
 
-        jButton2.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Opciones");
 
@@ -93,7 +99,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(277, 277, 277))
         );
         layout.setVerticalGroup(
@@ -104,7 +110,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -126,6 +132,28 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+      int columnaId = 0; // Columna donde está el id, aunque esté oculta
+int filaSeleccionada = tblProveedores.getSelectedRow();
+
+
+    if (filaSeleccionada >= 0) {
+        int id = (int) tblProveedores.getModel().getValueAt(filaSeleccionada, columnaId);
+        
+        // Mostrar cuadro de diálogo de confirmación
+        int opcion = JOptionPane.showConfirmDialog(ProveedorListado2.this, "¿Está seguro de eliminar el conductor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            ProveedorDAO conductorDAO = new ProveedorDAO();
+            conductorDAO.eliminar(id);
+            // Volver a cargar la tabla para reflejar los cambios
+            cargarTabla();
+        }
+    } else {
+        JOptionPane.showMessageDialog(ProveedorListado2.this, "Debe seleccionar un conductor para eliminar.");
+    } 
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,8 +224,8 @@ public class ProveedorListado2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAñadir;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
