@@ -116,7 +116,7 @@ public class ArticuloFormulario extends javax.swing.JDialog {
 
             boolean resultado = this.id == 0 ?
             ArticuloDAO.guardar(nombre,precio, clave,proveedor):
-            ArticuloDAO.editar(this.id, nombre, precio, clave, proveedor);
+            'ArticuloDAO.editar(this.id, nombre, precio, clave, proveedor);
 
             if(resultado){
                 JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
