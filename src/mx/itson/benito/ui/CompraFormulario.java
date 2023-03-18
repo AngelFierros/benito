@@ -5,9 +5,11 @@
 package mx.itson.benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.persistencia.ArticuloDAO;
+import mx.itson.benito.persistencia.CompraDAO;
 
 /**
  *
@@ -85,6 +87,11 @@ public class CompraFormulario extends javax.swing.JDialog {
         jLabel3.setText("Articulos:");
 
         jButton1.setText("Compra uwu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Cantidad");
 
@@ -189,6 +196,37 @@ public class CompraFormulario extends javax.swing.JDialog {
         txtNombre.setText(tblArticulos.getValueAt(tblArticulos.getSelectedRow(), 1).toString());
         txtProveedor.setText(tblArticulos.getValueAt(tblArticulos.getSelectedRow(), 4).toString());
     }//GEN-LAST:event_tblArticulosMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        String folio  = txtNombre.getText();
+        String fecha = txtFecha.getText();
+        String articulo = txtNombre.getText();
+        String proveedor = txtProveedor.getText();
+        String iva = txtIVA.getText();
+        String total = txtTotal.getText();
+
+        try {
+
+            boolean resultado = this.id == 0 ?
+            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total):
+            CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,iva,total);
+
+            if(resultado){
+                JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+                JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el registro", "Registro no guardado", JOptionPane.ERROR_MESSAGE);
+
+            }
+        } catch (Exception ex) {
+
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
