@@ -4,10 +4,13 @@
  */
 package mx.itson.benito.ui;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Articulo;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ArticuloDAO;
 import mx.itson.benito.persistencia.CompraDAO;
 
@@ -201,17 +204,18 @@ public class CompraFormulario extends javax.swing.JDialog {
         // TODO add your handling code here:
         
         
-        String folio  = txtNombre.getText();
-        String fecha = txtFecha.getText();
+        String folio  = txtFolio.getText();
+        String fechaString = txtFecha.getText();
         String articulo = txtNombre.getText();
         String proveedor = txtProveedor.getText();
         String iva = txtIVA.getText();
         String total = txtTotal.getText();
 
         try {
-
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = formato.parse(fechaString); // fecha en formato Date
             boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total)
+            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total):
             CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,iva,total);
 
             if(resultado){
