@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Compra;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -34,16 +36,18 @@ public class CompraDAO {
         return compras;
     }
     
-    public static boolean guardar(String folio, Double iva, Double total, Date fecha) {
+    public static boolean guardar(String folio, Date fecha, Articulo articulo,Proveedor proveedor,Double iva, Double total) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Compra c = new Compra();
             c.setFolio(folio);
+            c.setFecha(fecha);
+            c.getArticulo(articulo);
             c.setIva(iva);
             c.setTotal(total);
-            c.setFecha(fecha);
+            
           
             session.save(c);
 

@@ -6,6 +6,20 @@ import javax.persistence.*;
 @Entity
 public class Compra {
 
+    /**
+     * @return the articulo
+     */
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    /**
+     * @param articulo the articulo to set
+     */
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,16 +31,20 @@ public class Compra {
     @ManyToOne //se utiliza para indicar que el atributo proveedor es una relación muchos a uno con la entidad Proveedor.
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
+    
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
 
     public Compra() {
     }
 
-    public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor) {
+    public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor, Articulo articulo) {
         this.folio = folio;
         this.iva = iva;
         this.total = total;
         this.fecha = fecha;
         this.proveedor = proveedor;
+        this.articulo = articulo;
     }
 
     // Getters y Setters
@@ -78,6 +96,6 @@ public class Compra {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
-    
-    
+
+   
 }
