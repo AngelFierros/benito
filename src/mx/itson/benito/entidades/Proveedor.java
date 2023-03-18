@@ -107,5 +107,10 @@ public class Proveedor {
         this.telefono = telefono;
     }
     
+  @Override
+public String toString(){
+    return this.nombre;
+}
+        
     
 }

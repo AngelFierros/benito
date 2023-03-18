@@ -4,8 +4,11 @@
  */
 package mx.itson.benito.ui;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ArticuloDAO;
+import mx.itson.benito.persistencia.ProveedorDAO;
 
 /**
  *
@@ -22,7 +25,12 @@ public class ArticuloFormulario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+public void cargarProveedores() {
+    List<Proveedor> proveedores = ProveedorDAO.obtenerTodos();
+    for (Proveedor c : proveedores) {
+        cbxProveedor.addItem(c);
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +51,11 @@ public class ArticuloFormulario extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -51,6 +64,12 @@ public class ArticuloFormulario extends javax.swing.JDialog {
         jLabel3.setText("Clave");
 
         jLabel4.setText("Proveedor");
+
+        cbxProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProveedorActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -111,13 +130,14 @@ public class ArticuloFormulario extends javax.swing.JDialog {
         String nombre  = txtNombre.getText();
         String precio = txtPrecio.getText();
         String clave = txtClave.getText();
-        String proveedor = cbxProveedor.getSelectedItem();
+        Proveedor proveedor = (Proveedor) cbxProveedor.getSelectedItem();
         
         try {
 
             boolean resultado = this.id == 0 ?
-            ArticuloDAO.guardar(nombre,precio, clave,proveedor):
-            ArticuloDAO.editar(this.id, nombre, precio, clave, proveedor);
+           ArticuloDAO.guardar(nombre, Double.parseDouble(precio), clave, proveedor):
+           ArticuloDAO.editar(this.id, nombre, Double.parseDouble(precio), clave, proveedor);
+
 
             if(resultado){
                 JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
@@ -130,6 +150,14 @@ public class ArticuloFormulario extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbxProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProveedorActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       cargarProveedores();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -174,7 +202,7 @@ public class ArticuloFormulario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbxProveedor;
+    private javax.swing.JComboBox<Proveedor> cbxProveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
