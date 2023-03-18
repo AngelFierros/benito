@@ -203,7 +203,7 @@ public class CompraFormulario extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        
+       
         String folio  = txtFolio.getText();
         String fechaString = txtFecha.getText();
         String articulo = txtNombre.getText();
