@@ -211,7 +211,7 @@ public class CompraFormulario extends javax.swing.JDialog {
         try {
 
             boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total):
+            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total)
             CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,iva,total);
 
             if(resultado){

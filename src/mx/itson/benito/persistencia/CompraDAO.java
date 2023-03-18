@@ -44,7 +44,8 @@ public class CompraDAO {
             Compra c = new Compra();
             c.setFolio(folio);
             c.setFecha(fecha);
-            c.getArticulo(articulo);
+            c.setArticulo(articulo);
+            c.setProveedor(proveedor);
             c.setIva(iva);
             c.setTotal(total);
             

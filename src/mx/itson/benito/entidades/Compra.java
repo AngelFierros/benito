@@ -6,20 +6,6 @@ import javax.persistence.*;
 @Entity
 public class Compra {
 
-    /**
-     * @return the articulo
-     */
-    public Articulo getArticulo() {
-        return articulo;
-    }
-
-    /**
-     * @param articulo the articulo to set
-     */
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -97,5 +83,18 @@ public class Compra {
         this.proveedor = proveedor;
     }
 
-   
+    /**
+     * @return the articulo
+     */
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    /**
+     * @param articulo the articulo to set
+     */
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
+    }
+    
 }
