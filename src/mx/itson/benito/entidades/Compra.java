@@ -16,15 +16,15 @@ public class Compra {
 
     @ManyToOne //se utiliza para indicar que el atributo proveedor es una relación muchos a uno con la entidad Proveedor.
     @JoinColumn(name = "proveedor_id")
-    private Proveedor proveedor;
+    private String proveedor;
     
     @JoinColumn(name = "articulo_id")
-    private Articulo articulo;
+    private String articulo;
 
     public Compra() {
     }
 
-    public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor, Articulo articulo) {
+    public Compra(String folio, double iva, double total, Date fecha, String proveedor, String articulo) {
         this.folio = folio;
         this.iva = iva;
         this.total = total;
@@ -75,25 +75,25 @@ public class Compra {
         this.fecha = fecha;
     }
 
-    public Proveedor getProveedor() {
+    public String getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
 
     /**
      * @return the articulo
      */
-    public Articulo getArticulo() {
+    public String getArticulo() {
         return articulo;
     }
 
     /**
      * @param articulo the articulo to set
      */
-    public void setArticulo(Articulo articulo) {
+    public void setArticulo(String articulo) {
         this.articulo = articulo;
     }
     

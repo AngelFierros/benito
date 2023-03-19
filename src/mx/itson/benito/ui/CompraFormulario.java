@@ -215,8 +215,8 @@ public class CompraFormulario extends javax.swing.JDialog {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = formato.parse(fechaString); // fecha en formato Date
             boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio,fecha,articulo,proveedor,iva,total):
-            CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,iva,total);
+            CompraDAO.guardar(folio,fecha,articulo,proveedor,Double.parseDouble(iva),Double.parseDouble(total)):
+            CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,Double.parseDouble(iva),Double.parseDouble(total));
 
             if(resultado){
                 JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
