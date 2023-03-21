@@ -86,4 +86,7 @@ public class Articulo {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
+     
+public String toStringArticulo(){
+    return this.nombre;}
 }

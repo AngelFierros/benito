@@ -14,12 +14,14 @@ public class Compra {
     private double total;
     private Date fecha;
 
-    @ManyToOne //se utiliza para indicar que el atributo proveedor es una relación muchos a uno con la entidad Proveedor.
-    @JoinColumn(name = "idProveedor")
-    private Proveedor proveedor;
-    @OneToOne
-    @JoinColumn(name = "idArticulo")
-    private Articulo articulo;
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "idProveedor")
+private Proveedor proveedor;
+
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "idArticulo")
+private Articulo articulo;
+
 
     public Compra() {
     }

@@ -201,33 +201,30 @@ public class CompraFormulario extends javax.swing.JDialog {
     }//GEN-LAST:event_tblArticulosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-       
-        String folio  = txtFolio.getText();
-        String fechaString = txtFecha.getText();
-        String articulo = txtNombre.getText();
-        String proveedor = txtProveedor.getText();
-        String iva = txtIVA.getText();
-        String total = txtTotal.getText();
+    String folio  = txtFolio.getText();
+    String fechaString = txtFecha.getText();
+    String iva = txtIVA.getText();
+    String total = txtTotal.getText();
 
-        try {
+    // Obtener instancias de Articulo y Proveedor seleccionados
+    Articulo articuloSeleccionado = (Articulo) comboArticulos.getSelectedItem();
+    Proveedor proveedorSeleccionado = (Proveedor) comboProveedores.getSelectedItem();
+
+    try {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = formato.parse(fechaString); // fecha en formato Date
-            boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio,fecha,articulo,proveedor,Double.parseDouble(iva),Double.parseDouble(total)):
-            CompraDAO.editar(this.id,folio,fecha,articulo,proveedor,Double.parseDouble(iva),Double.parseDouble(total));
+        boolean resultado = this.id == 0 ?
+            CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado, Double.parseDouble(iva), Double.parseDouble(total)) :
+            CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, Double.parseDouble(iva), Double.parseDouble(total));
 
-            if(resultado){
-                JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
-
-            }else{
-                JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el registro", "Registro no guardado", JOptionPane.ERROR_MESSAGE);
-
-            }
-        } catch (Exception ex) {
-
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el registro", "Registro no guardado", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (Exception ex) {
+        // Manejo de excepciones
+    }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
