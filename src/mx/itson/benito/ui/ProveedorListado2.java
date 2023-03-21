@@ -139,25 +139,24 @@ public class ProveedorListado2 extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-      int columnaId = 0; // Columna donde está el id, aunque esté oculta
-int filaSeleccionada = tblProveedores.getSelectedRow();
+        int columnaId = 0; // Columna donde está el id, aunque esté oculta
+        int filaSeleccionada = tblProveedores.getSelectedRow();
 
+        if (filaSeleccionada >= 0) {
+            int id = (int) tblProveedores.getModel().getValueAt(filaSeleccionada, columnaId);
 
-    if (filaSeleccionada >= 0) {
-        int id = (int) tblProveedores.getModel().getValueAt(filaSeleccionada, columnaId);
-        
-        // Mostrar cuadro de diálogo de confirmación
-        int opcion = JOptionPane.showConfirmDialog(ProveedorListado2.this, "¿Está seguro de eliminar el conductor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-        
-        if (opcion == JOptionPane.YES_OPTION) {
-            ProveedorDAO conductorDAO = new ProveedorDAO();
-            conductorDAO.eliminar(id);
-            // Volver a cargar la tabla para reflejar los cambios
-            cargarTabla();
+            // Mostrar cuadro de diálogo de confirmación
+            int opcion = JOptionPane.showConfirmDialog(ProveedorListado2.this, "¿Está seguro de eliminar el conductor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                ProveedorDAO proveedorDAO = new ProveedorDAO();
+                proveedorDAO.borrarProveedorConArticulos(proveedor);
+                // Volver a cargar la tabla para reflejar los cambios
+                cargarTabla();
+            }
+        } else {
+            JOptionPane.showMessageDialog(ProveedorListado2.this, "Debe seleccionar un conductor para eliminar.");
         }
-    } else {
-        JOptionPane.showMessageDialog(ProveedorListado2.this, "Debe seleccionar un conductor para eliminar.");
-    } 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

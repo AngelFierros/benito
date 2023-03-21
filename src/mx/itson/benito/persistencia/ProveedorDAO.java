@@ -7,10 +7,14 @@ package mx.itson.benito.persistencia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.utilerias.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -113,5 +117,26 @@ public class ProveedorDAO {
         }
         return resultado;
     }
+     
+     public void borrarProveedorConArticulos(Proveedor proveedor) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        // Borra todos los artículos del proveedor
+        Query<Articulo> query = session.createQuery("delete from Articulo where proveedor.id = :idProveedor");
+        query.setParameter("idProveedor", proveedor.getId());
+        query.executeUpdate();
+
+        // Borra el proveedor
+        session.delete(proveedor);
+
+        tx.commit();
+        session.close();
+    }
+     
+     
+     
+     
      
 }

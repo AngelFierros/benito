@@ -5,6 +5,7 @@
 package mx.itson.benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.persistencia.ArticuloDAO;
@@ -68,6 +69,11 @@ public class ArticuloListado extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Opciones");
 
@@ -134,8 +140,44 @@ public class ArticuloListado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        int reglon = tblArticulos.getSelectedRow();
+        String id = tblArticulos.getModel().getValueAt(reglon,0).toString();
+        
+        ArticuloFormulario formulario = new ArticuloFormulario(this, true, Integer.parseInt(id));
+        formulario.setVisible(true);
+
+        cargarTabla();
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        int columnaId = 0; // Columna donde está el id, aunque esté oculta
+        int filaSeleccionada = tblArticulos.getSelectedRow();
+
+        if (filaSeleccionada >= 0) {
+            int id = (int) tblArticulos.getModel().getValueAt(filaSeleccionada, columnaId);
+
+            // Mostrar cuadro de diálogo de confirmación
+            int opcion = JOptionPane.showConfirmDialog(ArticuloListado.this, "¿Está seguro de eliminar el conductor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                ArticuloDAO articuloDAO = new ArticuloDAO();
+                articuloDAO.eliminar(id);
+                // Volver a cargar la tabla para reflejar los cambios
+                cargarTabla();
+            }
+        } else {
+            JOptionPane.showMessageDialog(ArticuloListado.this, "Debe seleccionar un conductor para eliminar.");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,9 +6,12 @@ package mx.itson.benito.ui;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ArticuloDAO;
 import mx.itson.benito.persistencia.ProveedorDAO;
+import org.hibernate.sql.Select;
 
 /**
  *
@@ -24,6 +27,13 @@ public class ArticuloFormulario extends javax.swing.JDialog {
     public ArticuloFormulario(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.id = id;
+        
+        cargarFormulario();
+        
+        cargarProveedores();
+        
     }
 public void cargarProveedores() {
     List<Proveedor> proveedores = ProveedorDAO.obtenerTodos();
@@ -31,6 +41,20 @@ public void cargarProveedores() {
         cbxProveedor.addItem(c);
     }
 }
+
+public void cargarFormulario() {
+        if (this.id != 0) {
+            Articulo a = ArticuloDAO.obtenerPorId(this.id);
+            txtNombre.setText(a.getNombre());
+            txtPrecio.setText(String.valueOf(a.getPrecio()));
+            txtClave.setText(a.getClave());
+            cbxProveedor.setSelectedItem(a.getProveedor());
+        }
+
+    }
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +76,9 @@ public void cargarProveedores() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -158,6 +185,14 @@ public void cargarProveedores() {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        cargarProveedores();
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        
+        ArticuloListado articulo = (ArticuloListado) SwingUtilities.getWindowAncestor(ArticuloFormulario.this);
+        articulo.cargarTabla();
+        
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
