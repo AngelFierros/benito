@@ -6,6 +6,20 @@ import javax.persistence.*;
 @Entity
 public class Compra {
 
+    /**
+     * @return the cantidad
+     */
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * @param cantidad the cantidad to set
+     */
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,6 +27,7 @@ public class Compra {
     private double iva;
     private double total;
     private Date fecha;
+    private double cantidad;
 
 @ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "idProveedor")

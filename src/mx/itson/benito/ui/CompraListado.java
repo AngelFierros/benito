@@ -4,6 +4,11 @@
  */
 package mx.itson.benito.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.benito.entidades.Compra;
+import mx.itson.benito.persistencia.CompraDAO;
+
 /**
  *
  * @author PC
@@ -34,6 +39,11 @@ public class CompraListado extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +103,12 @@ public class CompraListado extends javax.swing.JFrame {
         compra.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        cargarTabla();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -128,6 +144,42 @@ public class CompraListado extends javax.swing.JFrame {
         });
     }
 
+    void cargarTabla() {
+
+        try {
+
+            DefaultTableModel modelo = (DefaultTableModel) tblCompra.getModel();
+            modelo.setRowCount(0);
+            CompraDAO com = new CompraDAO();
+
+            List<Compra> compra = com.obtenerTodos();
+
+            for (Compra c : compra) {
+
+                modelo.addRow(new Object[]{c.getId(),
+                    c.getFolio(),
+                    c.getFecha(),
+                    c.getProveedor(),
+                    c.getArticulo(),
+                    c.getCantidad(),
+                    c.getIva(),
+                    c.getTotal()
+                
+                });
+
+            }
+
+        } catch (Exception ex) {
+
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+
+        }
+       
+    }          
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
