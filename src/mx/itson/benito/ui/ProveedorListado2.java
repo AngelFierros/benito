@@ -7,8 +7,14 @@ package mx.itson.benito.ui;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import mx.itson.benito.entidades.Articulo;
 import mx.itson.benito.entidades.Proveedor;
 import mx.itson.benito.persistencia.ProveedorDAO;
+import mx.itson.benito.utilerias.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -139,6 +145,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
         int columnaId = 0; // Columna donde está el id, aunque esté oculta
         int filaSeleccionada = tblProveedores.getSelectedRow();
 
@@ -150,7 +157,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
 
             if (opcion == JOptionPane.YES_OPTION) {
                 ProveedorDAO proveedorDAO = new ProveedorDAO();
-                proveedorDAO.borrarProveedorConArticulos(proveedor);
+                proveedorDAO.eliminar(id);
                 // Volver a cargar la tabla para reflejar los cambios
                 cargarTabla();
             }
@@ -237,7 +244,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         }
        
     }           
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAñadir;
     private javax.swing.JButton btnEliminar;
