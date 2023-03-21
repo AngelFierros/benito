@@ -87,6 +87,8 @@ public class Articulo {
         this.proveedor = proveedor;
     }
      
-public String toStringArticulo(){
-    return this.nombre;}
+@Override
+public String toString(){
+    return this.nombre;
+}
 }
