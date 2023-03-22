@@ -5,6 +5,7 @@
 package mx.itson.benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.benito.entidades.Compra;
 import mx.itson.benito.persistencia.CompraDAO;
@@ -68,6 +69,11 @@ public class CompraListado extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Opciones");
 
@@ -148,6 +154,31 @@ public class CompraListado extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        int columnaId = 0; // Columna donde está el id, aunque esté oculta
+        int filaSeleccionada = tblCompra.getSelectedRow();
+
+        if (filaSeleccionada >= 0) {
+            int id = (int) tblCompra.getModel().getValueAt(filaSeleccionada, columnaId);
+
+            // Mostrar cuadro de diálogo de confirmación
+            int opcion = JOptionPane.showConfirmDialog(CompraListado.this, "¿Está seguro de eliminar el proveedor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                CompraDAO compraDAO = new CompraDAO();
+                compraDAO.eliminar(id);
+                // Volver a cargar la tabla para reflejar los cambios
+                cargarTabla();
+            }
+        } else {
+            JOptionPane.showMessageDialog(CompraListado.this, "Debe seleccionar un proveedor para eliminar.");
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

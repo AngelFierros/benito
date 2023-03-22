@@ -44,11 +44,11 @@ public class Compra {
     private double cantidad;
     private String estado;
 
-@ManyToOne(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.MERGE)
 @JoinColumn(name = "idProveedor")
 private Proveedor proveedor;
 
-@OneToOne(cascade = CascadeType.ALL)
+@OneToOne(cascade = CascadeType.MERGE)
 @JoinColumn(name = "idArticulo")
 private Articulo articulo;
 
