@@ -23,40 +23,39 @@ import mx.itson.benito.persistencia.ProveedorDAO;
  */
 public class CompraFormulario extends javax.swing.JDialog {
 //
-     int id = 0;
-    
+
+    int id = 0;
+
     /**
      * Creates new form CompraFormulario
      */
     public CompraFormulario(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        
+
         this.id = id;
-        
-        
+
         cargarConductores();
         cargarOficiales();
-        
+
         cargarFormulario();
-    
+
     }
 
-    public void cargarConductores(){
+    public void cargarConductores() {
         List<Articulo> articulos = ArticuloDAO.obtenerTodos();
-        for(Articulo a : articulos){
+        for (Articulo a : articulos) {
             cbxArticulos.addItem(a);
         }
     }
-    
-    public void cargarOficiales(){
+
+    public void cargarOficiales() {
         List<Proveedor> proveedores = ProveedorDAO.obtenerTodos();
-        for(Proveedor p : proveedores){
+        for (Proveedor p : proveedores) {
             cbxProveedores.addItem(p);
-        }    
+        }
     }
-    
-    
+
     public void cargarFormulario() {
         if (this.id != 0) {
             Compra c = CompraDAO.obtenerPorId(this.id);
@@ -64,19 +63,14 @@ public class CompraFormulario extends javax.swing.JDialog {
             txtFecha.setText(c.getFecha().toString());
             cbxArticulos.setSelectedItem(c.getProveedor());
             cbxProveedores.setSelectedItem(c.getProveedor());
-           // txtCantidad.setText(String.valueOf(c.getCantidad()));
+            // txtCantidad.setText(String.valueOf(c.getCantidad()));
             txtIVA.setText(String.valueOf(c.getIva()));
             txtTotal.setText(String.valueOf(c.getTotal()));
-            
+
         }
 
     }
-    
-    
-    
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +85,7 @@ public class CompraFormulario extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -113,31 +107,56 @@ public class CompraFormulario extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Folio");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 26, -1, -1));
+        getContentPane().add(txtFolio, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 42, 123, -1));
 
-        jLabel2.setText("Fecha");
+        jLabel2.setText("Fecha (yyyy-mm-dd)");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 70, -1, -1));
 
-        jLabel3.setText("Articulos:");
-
-        jButton1.setText("Compra uwu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtFechaActionPerformed(evt);
             }
         });
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 92, 117, -1));
+
+        jLabel3.setText("Articulos:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 159, -1, -1));
+
+        btnComprar.setText("Compra");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 273, 157, 58));
 
         jLabel6.setText("Cantidad");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 26, -1, -1));
 
         jLabel4.setText("IVA (%):");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 92, -1, -1));
 
-        jLabel5.setText("Total");
+        jLabel5.setText("Total (IVA incluido):");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
 
         jLabel9.setText("Proveedores:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 159, -1, -1));
+
+        getContentPane().add(cbxArticulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 187, 137, -1));
+
+        getContentPane().add(cbxProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 187, 126, -1));
+        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 159, -1, -1));
 
         txtIVA.setText("16");
+        getContentPane().add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 92, 20, -1));
 
-        jLabel7.setText("Subtotal");
+        jLabel7.setText("Subtotal:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 70, -1, -1));
+        getContentPane().add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 98, -1, -1));
 
         cbxCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
         cbxCantidad.addItemListener(new java.awt.event.ItemListener() {
@@ -145,91 +164,7 @@ public class CompraFormulario extends javax.swing.JDialog {
                 cbxCantidadItemStateChanged(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(172, 172, 172)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txtTotal)))
-                            .addComponent(cbxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSubtotal)
-                            .addComponent(jLabel7))))
-                .addContainerGap(117, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtTotal))
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(64, 64, 64)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(txtIVA)))
-                        .addGap(346, 346, 346))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSubtotal)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        getContentPane().add(cbxCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 42, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,64 +173,69 @@ public class CompraFormulario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String folio = txtFolio.getText();
-    String fechaString = txtFecha.getText();
-    String ivaString = txtIVA.getText();    
-    double iva = Double.parseDouble(ivaString);    
-    Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
-    double precioArticulo = articuloSeleccionado.getPrecio();
-    Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
-    int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
-    double subtotal = cantidad * precioArticulo;
-    double total = subtotal + (subtotal * (iva / 100));
-    txtSubtotal.setText(String.valueOf(subtotal));
-    txtTotal.setText(String.valueOf(total));
-    
-    
-    
-    // Obtener instancias de Articulo y Proveedor seleccionados
-    
-    try {
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        Date fecha = formato.parse(fechaString); // fecha en formato Date
-        boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado,cantidad, iva, total) :
-            CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total);
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        String folio = txtFolio.getText();
+        String fechaString = txtFecha.getText().replace(" ", "-").replace("/", "-").replace(".", "-");
+        String ivaString = txtIVA.getText();
+        double iva = Double.parseDouble(ivaString);
+        Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
+        double precioArticulo = articuloSeleccionado.getPrecio();
+        Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
+        int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
+        double subtotal = cantidad * precioArticulo;
+        double total = subtotal + (subtotal * (iva / 100));
+        txtSubtotal.setText(String.valueOf(subtotal));
+        txtTotal.setText(String.valueOf(total));
 
-        if(resultado){
-            JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el registro", "Registro no guardado", JOptionPane.ERROR_MESSAGE);
+// Obtener instancias de Articulo y Proveedor seleccionados
+        if (folio.isEmpty() || fechaString.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Favor de ingresar el folio y la fecha", "Campos vacíos", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                  SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                Date fecha = formato.parse(fechaString); // fecha en formato Date
+                boolean resultado = this.id == 0
+                        ? CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total)
+                        : CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total);
+
+                if (resultado) {
+                    JOptionPane.showMessageDialog(this, "Pedido realizado con éxito", "Pedido guardado", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocurrio un error al guardar el Pedido", "Pedido no guardado", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception ex) {
+                // Manejo de excepciones
+            }
         }
-    } catch (Exception ex) {
-        // Manejo de excepciones
-    }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    }//GEN-LAST:event_btnComprarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        
+
         CompraListado compraa = (CompraListado) SwingUtilities.getWindowAncestor(CompraFormulario.this);
         compraa.cargarTabla();
-        
-        
+
+
     }//GEN-LAST:event_formWindowClosed
 
     private void cbxCantidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCantidadItemStateChanged
-    String ivaString = txtIVA.getText();    
-    double iva = Double.parseDouble(ivaString);    
-    Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
-    double precioArticulo = articuloSeleccionado.getPrecio();
-    Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
-    int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
-    double subtotal = cantidad * precioArticulo;
-    double total = subtotal + (subtotal * (iva / 100));
-    txtSubtotal.setText(String.valueOf(subtotal));
-    txtTotal.setText(String.valueOf(total));
+        String ivaString = txtIVA.getText();
+        double iva = Double.parseDouble(ivaString);
+        Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
+        double precioArticulo = articuloSeleccionado.getPrecio();
+        Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
+        int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
+        double subtotal = cantidad * precioArticulo;
+        double total = subtotal + (subtotal * (iva / 100));
+        txtSubtotal.setText(String.valueOf(subtotal));
+        txtTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_cbxCantidadItemStateChanged
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,43 +278,13 @@ public class CompraFormulario extends javax.swing.JDialog {
             }
         });
     }
-    
-   /* 
-    void cargarTabla() {
 
-        try {
-
-            DefaultTableModel modelo = (DefaultTableModel) tblArticulos.getModel();
-            modelo.setRowCount(0);
-            ArticuloDAO art = new ArticuloDAO();
-
-            List<Articulo> arti = art.obtenerTodos();
-
-            for (Articulo a : arti) {
-
-                modelo.addRow(new Object[]{a.getId(),
-                    a.getNombre(),
-                    a.getPrecio(),
-                    a.getClave(),
-                    a.getProveedor().getNombre()
-                
-                });
-
-            }
-
-        } catch (Exception ex) {
-
-            System.err.println("Ocurrio un error: " + ex.getMessage());
-
-        }
-    
-    }   
- */  
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComprar;
     private javax.swing.JComboBox<Articulo> cbxArticulos;
     private javax.swing.JComboBox<String> cbxCantidad;
     private javax.swing.JComboBox<Proveedor> cbxProveedores;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

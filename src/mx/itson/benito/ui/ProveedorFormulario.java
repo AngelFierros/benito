@@ -61,7 +61,7 @@ public class ProveedorFormulario extends javax.swing.JDialog {
         txtTelefono = new javax.swing.JTextField();
         txtContacto = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         txtDireccion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
@@ -82,10 +82,10 @@ public class ProveedorFormulario extends javax.swing.JDialog {
 
         jLabel1.setText("Nombre");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -97,9 +97,6 @@ public class ProveedorFormulario extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -114,7 +111,10 @@ public class ProveedorFormulario extends javax.swing.JDialog {
                             .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                             .addComponent(txtClave)
                             .addComponent(txtContacto)
-                            .addComponent(txtDireccion))))
+                            .addComponent(txtDireccion)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,15 +144,15 @@ public class ProveedorFormulario extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
 
         String nombre  = txtNombre.getText();
@@ -178,11 +178,11 @@ public class ProveedorFormulario extends javax.swing.JDialog {
         } catch (Exception ex) {
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-         // Obtiene la instancia de ProveedorListado2 y llama a cargarTabla
-        ProveedorListado2 listado = (ProveedorListado2) SwingUtilities.getWindowAncestor(ProveedorFormulario.this);
+         // Obtiene la instancia de ProveedorListado y llama a cargarTabla
+        ProveedorListado listado = (ProveedorListado) SwingUtilities.getWindowAncestor(ProveedorFormulario.this);
         listado.cargarTabla();
     }//GEN-LAST:event_formWindowClosed
 
@@ -230,7 +230,7 @@ public class ProveedorFormulario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

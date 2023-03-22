@@ -20,12 +20,12 @@ import org.hibernate.query.Query;
  *
  * @author PC
  */
-public class ProveedorListado2 extends javax.swing.JFrame {
+public class ProveedorListado extends javax.swing.JFrame {
 
     /**
      * Creates new form ProveedorListado2
      */
-    public ProveedorListado2() {
+    public ProveedorListado() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedores = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -67,10 +67,10 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProveedores);
 
-        jButton1.setText("Editar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -108,7 +108,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(277, 277, 277))
@@ -120,7 +120,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -153,7 +153,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
             int id = (int) tblProveedores.getModel().getValueAt(filaSeleccionada, columnaId);
 
             // Mostrar cuadro de diálogo de confirmación
-            int opcion = JOptionPane.showConfirmDialog(ProveedorListado2.this, "¿Está seguro de eliminar el conductor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            int opcion = JOptionPane.showConfirmDialog(ProveedorListado.this, "¿Está seguro de eliminar el proveedor seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
             if (opcion == JOptionPane.YES_OPTION) {
                 ProveedorDAO proveedorDAO = new ProveedorDAO();
@@ -162,11 +162,11 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 cargarTabla();
             }
         } else {
-            JOptionPane.showMessageDialog(ProveedorListado2.this, "Debe seleccionar un conductor para eliminar.");
+            JOptionPane.showMessageDialog(ProveedorListado.this, "Debe seleccionar un proveedor para eliminar.");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         
         int reglon = tblProveedores.getSelectedRow();
@@ -176,7 +176,7 @@ public class ProveedorListado2 extends javax.swing.JFrame {
         formulario.setVisible(true);
 
         cargarTabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,20 +195,21 @@ public class ProveedorListado2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProveedorListado2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProveedorListado2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProveedorListado2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProveedorListado2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProveedorListado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProveedorListado2().setVisible(true);
+                new ProveedorListado().setVisible(true);
             }
         });
     }
@@ -247,8 +248,8 @@ public class ProveedorListado2 extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAñadir;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
