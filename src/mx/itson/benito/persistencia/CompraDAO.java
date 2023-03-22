@@ -36,7 +36,7 @@ public class CompraDAO {
         return compras;
     }
     
-    public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor,Double iva, Double total) {
+   public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, Double iva, Double total) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -46,9 +46,9 @@ public class CompraDAO {
             c.setFecha(fecha);
             c.setArticulo(articulo);
             c.setProveedor(proveedor);
+            c.setCantidad(cantidad); // Agregamos la cantidad
             c.setIva(iva);
             c.setTotal(total);
-            
           
             session.save(c);
 
@@ -58,10 +58,9 @@ public class CompraDAO {
         } catch (Exception ex) {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
-
         return resultado;
-    }
-     public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor,Double iva, Double total){
+}
+     public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor,int cantidad,Double iva, Double total){
        boolean resultado = false;
         try{
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -73,6 +72,7 @@ public class CompraDAO {
                 compra.setFecha(fecha);
                 compra.setArticulo(articulo);
                 compra.setProveedor(proveedor);
+                compra.setCantidad(cantidad); // Agregamos la cantidad
                 compra.setIva(iva);
                 compra.setTotal(total);
                

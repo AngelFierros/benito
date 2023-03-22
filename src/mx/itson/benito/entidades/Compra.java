@@ -108,7 +108,17 @@ private Articulo articulo;
         this.articulo = articulo;
     }
 
-   
+     // Método para calcular el subtotal
+    public double calcularSubtotal() {
+        return cantidad * articulo.getPrecio(); // Multiplica la cantidad de artículos por el precio unitario del artículo
+    }
+
+    // Método para calcular el total (incluyendo el IVA)
+    public double calcularTotal() {
+        double subtotal = calcularSubtotal();
+        double ivaMonto = subtotal * (iva / 100); // Calcula el monto del IVA
+        return subtotal + ivaMonto; // Suma el subtotal y el monto del IVA para obtener el total
+    }
     
     
 }

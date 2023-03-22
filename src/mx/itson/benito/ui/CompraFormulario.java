@@ -39,6 +39,7 @@ public class CompraFormulario extends javax.swing.JDialog {
         cargarOficiales();
         
         cargarFormulario();
+    
     }
 
     public void cargarConductores(){
@@ -63,7 +64,7 @@ public class CompraFormulario extends javax.swing.JDialog {
             txtFecha.setText(c.getFecha().toString());
             cbxArticulos.setSelectedItem(c.getProveedor());
             cbxProveedores.setSelectedItem(c.getProveedor());
-            txtCantidad.setText(String.valueOf(c.getCantidad()));
+           // txtCantidad.setText(String.valueOf(c.getCantidad()));
             txtIVA.setText(String.valueOf(c.getIva()));
             txtTotal.setText(String.valueOf(c.getTotal()));
             
@@ -92,14 +93,16 @@ public class CompraFormulario extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
-        txtIVA = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cbxArticulos = new javax.swing.JComboBox<>();
         cbxProveedores = new javax.swing.JComboBox<>();
+        txtTotal = new javax.swing.JLabel();
+        txtIVA = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtSubtotal = new javax.swing.JLabel();
+        cbxCantidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -126,11 +129,22 @@ public class CompraFormulario extends javax.swing.JDialog {
 
         jLabel6.setText("Cantidad");
 
-        jLabel4.setText("IVA");
+        jLabel4.setText("IVA (%):");
 
         jLabel5.setText("Total");
 
         jLabel9.setText("Proveedores:");
+
+        txtIVA.setText("16");
+
+        jLabel7.setText("Subtotal");
+
+        cbxCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
+        cbxCantidad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCantidadItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +153,6 @@ public class CompraFormulario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -147,27 +160,32 @@ public class CompraFormulario extends javax.swing.JDialog {
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel6)))
+                                .addComponent(jLabel6)
+                                .addGap(172, 172, 172)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtTotal)))
+                            .addComponent(cbxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(146, 146, 146)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cbxProveedores, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtIVA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(91, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSubtotal)
+                            .addComponent(jLabel7))))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,31 +194,41 @@ public class CompraFormulario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel9))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(346, 346, 346))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txtTotal))
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbxArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(64, 64, 64)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtIVA)))
+                        .addGap(346, 346, 346))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSubtotal)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -211,21 +239,29 @@ public class CompraFormulario extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String folio  = txtFolio.getText();
+    String folio = txtFolio.getText();
     String fechaString = txtFecha.getText();
-    String iva = txtIVA.getText();
-    String total = txtTotal.getText();
-
-    // Obtener instancias de Articulo y Proveedor seleccionados
+    String ivaString = txtIVA.getText();    
+    double iva = Double.parseDouble(ivaString);    
     Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
+    double precioArticulo = articuloSeleccionado.getPrecio();
     Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
-
+    int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
+    double subtotal = cantidad * precioArticulo;
+    double total = subtotal + (subtotal * (iva / 100));
+    txtSubtotal.setText(String.valueOf(subtotal));
+    txtTotal.setText(String.valueOf(total));
+    
+    
+    
+    // Obtener instancias de Articulo y Proveedor seleccionados
+    
     try {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = formato.parse(fechaString); // fecha en formato Date
         boolean resultado = this.id == 0 ?
-            CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado, Double.parseDouble(iva), Double.parseDouble(total)) :
-            CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, Double.parseDouble(iva), Double.parseDouble(total));
+            CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado,cantidad, iva, total) :
+            CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total);
 
         if(resultado){
             JOptionPane.showMessageDialog(this, "El registro fue guardado correctamente","Registro guardado",JOptionPane.INFORMATION_MESSAGE);
@@ -247,6 +283,19 @@ public class CompraFormulario extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_formWindowClosed
+
+    private void cbxCantidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCantidadItemStateChanged
+    String ivaString = txtIVA.getText();    
+    double iva = Double.parseDouble(ivaString);    
+    Articulo articuloSeleccionado = (Articulo) cbxArticulos.getSelectedItem();
+    double precioArticulo = articuloSeleccionado.getPrecio();
+    Proveedor proveedorSeleccionado = (Proveedor) cbxProveedores.getSelectedItem();
+    int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
+    double subtotal = cantidad * precioArticulo;
+    double total = subtotal + (subtotal * (iva / 100));
+    txtSubtotal.setText(String.valueOf(subtotal));
+    txtTotal.setText(String.valueOf(total));
+    }//GEN-LAST:event_cbxCantidadItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -323,6 +372,7 @@ public class CompraFormulario extends javax.swing.JDialog {
  */  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Articulo> cbxArticulos;
+    private javax.swing.JComboBox<String> cbxCantidad;
     private javax.swing.JComboBox<Proveedor> cbxProveedores;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -331,11 +381,12 @@ public class CompraFormulario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFolio;
-    private javax.swing.JTextField txtIVA;
-    private javax.swing.JTextField txtTotal;
+    private javax.swing.JLabel txtIVA;
+    private javax.swing.JLabel txtSubtotal;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }
