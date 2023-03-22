@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
+/**
+ * La clase "Proveedor" representa un proveedor que puede suministrar productos a la tienda en línea.
+ * Esta entidad utiliza la anotación @Entity para indicar que es una entidad JPA (Java Persistence API) 
+ * que se almacenará en una base de datos.
+ */
 @Entity
 public class Proveedor {
 
@@ -107,10 +110,11 @@ public class Proveedor {
         this.telefono = telefono;
     }
     
-  @Override
-public String toString(){
+    //Este método se utiliza para mostrar el nombre del artículo en lugar de su dirección de memoria.
+    @Override
+    public String toString(){
     return this.nombre;
-}
+    }
         
     
 }

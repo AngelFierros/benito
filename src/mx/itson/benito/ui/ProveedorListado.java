@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package mx.itson.benito.ui;
 
 import java.util.List;
@@ -17,8 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
- *
- * @author PC
+ * Ventana para mostrar el listado de proveedores y permitir su edición, eliminación y añadido.
  */
 public class ProveedorListado extends javax.swing.JFrame {
 
@@ -45,7 +41,6 @@ public class ProveedorListado extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAñadir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -93,9 +88,6 @@ public class ProveedorListado extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,7 +119,10 @@ public class ProveedorListado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Método para abrir un form para añadir un nuevo proveedor
+ * @param evt Abre un nuevo form para proveedor
+ */
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         
         
@@ -137,13 +132,19 @@ public class ProveedorListado extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnAñadirActionPerformed
-
+/**
+ * Método para cargar datos
+ * @param evt Carga la tabla al abrir el form
+ */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         tblProveedores.removeColumn(tblProveedores.getColumnModel().getColumn(0));
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
-
+/**
+ * Método para eliminar un proveedor
+ * @param evt Elimina al proveedor
+ */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
         int columnaId = 0; // Columna donde está el id, aunque esté oculta
@@ -165,7 +166,10 @@ public class ProveedorListado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(ProveedorListado.this, "Debe seleccionar un proveedor para eliminar.");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+/**
+ * Método para editar un proveedor
+ * @param evt Cambia los atributos seleccionados
+ */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         
@@ -213,7 +217,9 @@ public class ProveedorListado extends javax.swing.JFrame {
             }
         });
     }
-    
+    /**
+     * Método que carga los datos de la tabla
+     */
     void cargarTabla() {
 
         try {
@@ -251,7 +257,6 @@ public class ProveedorListado extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProveedores;

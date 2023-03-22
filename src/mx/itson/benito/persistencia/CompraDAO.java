@@ -17,10 +17,18 @@ import org.hibernate.Session;
 
 /**
  *
- * @author PC
+ * La clase CompraDAO es responsable de realizar operaciones de persistencia
+ * relacionadas con la entidad Compra. Contiene métodos para obtener todas las
+ * compras, guardar una nueva compra en la base de datos, editar una compra
+ * existente, obtener una compra por su ID y eliminar una compra.
  */
 public class CompraDAO {
-    
+
+    /**
+     * Obtiene todas las compras registradas en la base de datos.
+     *
+     * @return una lista de compras
+     */
     public static List<Compra> obtenerTodos() {
         List<Compra> compras = new ArrayList<>();
         try {
@@ -35,8 +43,22 @@ public class CompraDAO {
         }
         return compras;
     }
-    
-   public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, String estado, Double iva, Double total) {
+
+    /**
+     * Guarda una nueva compra en la base de datos.
+     *
+     * @param folio el folio de la compra
+     * @param fecha la fecha de la compra
+     * @param articulo el articulo comprado
+     * @param proveedor el proveedor del articulo
+     * @param cantidad la cantidad de articulos comprados
+     * @param estado el estado de la compra
+     * @param iva el valor del IVA aplicado a la compra
+     * @param total el total de la compra
+     * @return true si la compra fue guardada exitosamente, false en caso
+     * contrario
+     */
+    public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, String estado, Double iva, Double total) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -50,7 +72,7 @@ public class CompraDAO {
             c.setEstado(estado);
             c.setIva(iva);
             c.setTotal(total);
-          
+
             session.save(c);
 
             session.getTransaction().commit();
@@ -60,15 +82,33 @@ public class CompraDAO {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
         return resultado;
-}
-     public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor,int cantidad,String estado, Double iva, Double total){
-       boolean resultado = false;
-        try{
+    }
+
+    /**
+     *
+     *
+     * Actualiza los datos de una compra en la base de datos.
+     *
+     * @param id El id de la compra a editar.
+     * @param folio El nuevo folio de la compra.
+     * @param fecha La nueva fecha de la compra.
+     * @param articulo El nuevo articulo de la compra.
+     * @param proveedor El nuevo proveedor de la compra.
+     * @param cantidad La nueva cantidad de la compra.
+     * @param estado El nuevo estado de la compra.
+     * @param iva El nuevo IVA de la compra.
+     * @param total El nuevo total de la compra.
+     * @return true si se actualizó correctamente, false si no se pudo
+     * actualizar.
+     */
+    public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, String estado, Double iva, Double total) {
+        boolean resultado = false;
+        try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            
+
             Compra compra = obtenerPorId(id);
-            if(compra !=null){
+            if (compra != null) {
                 compra.setFolio(folio);
                 compra.setFecha(fecha);
                 compra.setArticulo(articulo);
@@ -77,8 +117,7 @@ public class CompraDAO {
                 compra.setEstado(estado);
                 compra.setIva(iva);
                 compra.setTotal(total);
-               
-                
+
                 session.saveOrUpdate(compra);
                 session.getTransaction().commit();
                 resultado = true;
@@ -88,8 +127,16 @@ public class CompraDAO {
         }
         return resultado;
     }
-     
-     public static Compra obtenerPorId(int id) {
+
+    /**
+     *
+     * Obtiene una compra por su id.
+     *
+     * @param id el id de la compra a obtener.
+     *
+     * @return la compra encontrada o null si no se encuentra.
+     */
+    public static Compra obtenerPorId(int id) {
         Compra compra = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -100,20 +147,28 @@ public class CompraDAO {
         }
         return compra;
     }
-    
-     public static boolean eliminar(int id){
+
+    /**
+     *
+     * Método para eliminar una compra de la base de datos.
+     *
+     * @param id el identificador de la compra a eliminar
+     *
+     * @return true si se eliminó la compra exitosamente, false si no
+     */
+    public static boolean eliminar(int id) {
         boolean resultado = false;
-        try{
+        try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            
+
             Compra compra = obtenerPorId(id);
-            if(compra !=null){
+            if (compra != null) {
                 session.delete(compra);
                 session.getTransaction().commit();
                 resultado = true;
-            }    
-        }catch (HibernateException ex) {
+            }
+        } catch (HibernateException ex) {
             System.err.println("Ocurrio un error: " + ex.getMessage());
         }
         return resultado;

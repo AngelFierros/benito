@@ -3,59 +3,51 @@ package mx.itson.benito.entidades;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * La clase "Compra" representa una compra realizada por un proveedor para adquirir un artículo en una tienda en línea.
+ * Esta entidad utiliza la anotación @Entity para indicar que es una entidad JPA (Java Persistence API) 
+ * que se almacenará en una base de datos.
+ */
 @Entity
 public class Compra {
 
-    /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    /**
-     * @return the cantidad
-     */
-    public double getCantidad() {
-        return cantidad;
-    }
-
-    /**
-     * @param cantidad the cantidad to set
-     */
-    public void setCantidad(double cantidad) {
-        this.cantidad = cantidad;
-    }
-
+    // Atributos de la clase
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String folio;
-    private double iva;
-    private double total;
-    private Date fecha;
-    private double cantidad;
-    private String estado;
+    private int id; // Identificador único de la compra
+    private String folio; // Folio de la compra
+    private double iva; // Porcentaje de IVA que se aplicó a la compra
+    private double total; // Total de la compra (incluyendo el IVA)
+    private Date fecha; // Fecha en que se realizó la compra
+    private double cantidad; // Cantidad de artículos comprados
+    private String estado; // Estado de la compra (por ejemplo: "pendiente", "pagada", "cancelada")
 
-@ManyToOne(cascade = CascadeType.MERGE)
-@JoinColumn(name = "idProveedor")
-private Proveedor proveedor;
+    // Relación muchos a uno con la entidad "Proveedor"
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idProveedor")
+    private Proveedor proveedor;
 
-@OneToOne(cascade = CascadeType.MERGE)
-@JoinColumn(name = "idArticulo")
-private Articulo articulo;
+    // Relación uno a uno con la entidad "Articulo"
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idArticulo")
+    private Articulo articulo;
 
-
+    /**
+     * Constructor por defecto.
+     */
     public Compra() {
     }
 
+    /**
+     * Constructor con parámetros.
+     * @param folio El folio de la compra.
+     * @param iva El porcentaje de IVA que se aplicó a la compra.
+     * @param total El total de la compra (incluyendo el IVA).
+     * @param fecha La fecha en que se realizó la compra.
+     * @param proveedor El proveedor que realizó la compra.
+     * @param articulo El artículo que se compró.
+     * @param estado El estado de la compra.
+     */
     public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor, Articulo articulo, String estado) {
         this.folio = folio;
         this.iva = iva;
@@ -66,7 +58,7 @@ private Articulo articulo;
         this.estado = estado;
     }
 
-    // Getters y Setters
+    // Getters y Setters para los atributos de la clase
 
     public int getId() {
         return id;
@@ -124,17 +116,19 @@ private Articulo articulo;
         this.articulo = articulo;
     }
 
-     // Método para calcular el subtotal
-    public double calcularSubtotal() {
-        return cantidad * articulo.getPrecio(); // Multiplica la cantidad de artículos por el precio unitario del artículo
+    public double getCantidad() {
+        return cantidad;
     }
 
-    // Método para calcular el total (incluyendo el IVA)
-    public double calcularTotal() {
-        double subtotal = calcularSubtotal();
-        double ivaMonto = subtotal * (iva / 100); // Calcula el monto del IVA
-        return subtotal + ivaMonto; // Suma el subtotal y el monto del IVA para obtener el total
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
     }
-    
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }
