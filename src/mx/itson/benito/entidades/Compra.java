@@ -7,6 +7,20 @@ import javax.persistence.*;
 public class Compra {
 
     /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    /**
      * @return the cantidad
      */
     public double getCantidad() {
@@ -28,6 +42,7 @@ public class Compra {
     private double total;
     private Date fecha;
     private double cantidad;
+    private String estado;
 
 @ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "idProveedor")
@@ -41,13 +56,14 @@ private Articulo articulo;
     public Compra() {
     }
 
-    public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor, Articulo articulo) {
+    public Compra(String folio, double iva, double total, Date fecha, Proveedor proveedor, Articulo articulo, String estado) {
         this.folio = folio;
         this.iva = iva;
         this.total = total;
         this.fecha = fecha;
         this.proveedor = proveedor;
         this.articulo = articulo;
+        this.estado = estado;
     }
 
     // Getters y Setters

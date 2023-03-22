@@ -36,7 +36,7 @@ public class CompraDAO {
         return compras;
     }
     
-   public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, Double iva, Double total) {
+   public static boolean guardar(String folio, Date fecha, Articulo articulo, Proveedor proveedor, int cantidad, String estado, Double iva, Double total) {
         boolean resultado = false;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -47,6 +47,7 @@ public class CompraDAO {
             c.setArticulo(articulo);
             c.setProveedor(proveedor);
             c.setCantidad(cantidad); // Agregamos la cantidad
+            c.setEstado(estado);
             c.setIva(iva);
             c.setTotal(total);
           
@@ -60,7 +61,7 @@ public class CompraDAO {
         }
         return resultado;
 }
-     public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor,int cantidad,Double iva, Double total){
+     public static boolean editar(int id, String folio, Date fecha, Articulo articulo, Proveedor proveedor,int cantidad,String estado, Double iva, Double total){
        boolean resultado = false;
         try{
             Session session = HibernateUtil.getSessionFactory().openSession();
@@ -73,6 +74,7 @@ public class CompraDAO {
                 compra.setArticulo(articulo);
                 compra.setProveedor(proveedor);
                 compra.setCantidad(cantidad); // Agregamos la cantidad
+                compra.setEstado(estado);
                 compra.setIva(iva);
                 compra.setTotal(total);
                

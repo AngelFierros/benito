@@ -63,7 +63,7 @@ public class CompraFormulario extends javax.swing.JDialog {
             txtFecha.setText(c.getFecha().toString());
             cbxArticulos.setSelectedItem(c.getProveedor());
             cbxProveedores.setSelectedItem(c.getProveedor());
-            // txtCantidad.setText(String.valueOf(c.getCantidad()));
+            cbxEstado.setSelectedItem(c.getEstado());
             txtIVA.setText(String.valueOf(c.getIva()));
             txtTotal.setText(String.valueOf(c.getTotal()));
 
@@ -97,6 +97,8 @@ public class CompraFormulario extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         txtSubtotal = new javax.swing.JLabel();
         cbxCantidad = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        cbxEstado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -132,7 +134,7 @@ public class CompraFormulario extends javax.swing.JDialog {
                 btnComprarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 273, 157, 58));
+        getContentPane().add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 157, 58));
 
         jLabel6.setText("Cantidad");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 26, -1, -1));
@@ -166,6 +168,12 @@ public class CompraFormulario extends javax.swing.JDialog {
         });
         getContentPane().add(cbxCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 42, -1, -1));
 
+        jLabel8.setText("Estado:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABIERTO", "CERRADO", "CANCELADO", " " }));
+        getContentPane().add(cbxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,6 +192,8 @@ public class CompraFormulario extends javax.swing.JDialog {
         int cantidad = Integer.parseInt(cbxCantidad.getSelectedItem().toString());
         double subtotal = cantidad * precioArticulo;
         double total = subtotal + (subtotal * (iva / 100));
+        String estado = (String) cbxEstado.getSelectedItem();
+        
         txtSubtotal.setText(String.valueOf(subtotal));
         txtTotal.setText(String.valueOf(total));
 
@@ -195,8 +205,8 @@ public class CompraFormulario extends javax.swing.JDialog {
                   SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fecha = formato.parse(fechaString); // fecha en formato Date
                 boolean resultado = this.id == 0
-                        ? CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total)
-                        : CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, iva, total);
+                        ? CompraDAO.guardar(folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad, estado, iva, total)
+                        : CompraDAO.editar(this.id, folio, fecha, articuloSeleccionado, proveedorSeleccionado, cantidad,estado, iva, total);
 
                 if (resultado) {
                     JOptionPane.showMessageDialog(this, "Pedido realizado con éxito", "Pedido guardado", JOptionPane.INFORMATION_MESSAGE);
@@ -284,6 +294,7 @@ public class CompraFormulario extends javax.swing.JDialog {
     private javax.swing.JButton btnComprar;
     private javax.swing.JComboBox<Articulo> cbxArticulos;
     private javax.swing.JComboBox<String> cbxCantidad;
+    private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<Proveedor> cbxProveedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -292,6 +303,7 @@ public class CompraFormulario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFolio;

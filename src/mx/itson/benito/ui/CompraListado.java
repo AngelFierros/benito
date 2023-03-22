@@ -49,13 +49,13 @@ public class CompraListado extends javax.swing.JFrame {
 
         tblCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Folio", "Fecha", "Proveedor", "Articulo", "Cantidad", "IVA", "TOTAL"
+                "id", "Folio", "Fecha", "Proveedor", "Articulo", "Cantidad", "Estado", "IVA", "TOTAL"
             }
         ));
         jScrollPane1.setViewportView(tblCompra);
@@ -128,6 +128,7 @@ public class CompraListado extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         
+        tblCompra.removeColumn(tblCompra.getColumnModel().getColumn(0));
         cargarTabla();
     }//GEN-LAST:event_formWindowOpened
 
@@ -201,6 +202,7 @@ public class CompraListado extends javax.swing.JFrame {
                     c.getProveedor(),
                     c.getArticulo(),
                     c.getCantidad(),
+                    c.getEstado(),
                     c.getIva(),
                     c.getTotal()
                 
